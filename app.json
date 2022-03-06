@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/mortgage/mortgage",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#1AAD19",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "Finance"
+  },
+
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
