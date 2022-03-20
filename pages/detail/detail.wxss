@@ -1,4 +1,4 @@
-/* pages/detail/detail.wxss */page,
+page,
 .page,
 .page__bd{
     height: 100%;
@@ -32,4 +32,70 @@
 .table .weui-flex__item + .weui-flex__item {
   border-left: 1px dashed #cfcfcf;
   flex-grow: 2;
+}
+/* .totalRepayAi_box{
+  margin-top: 5px;
+  display: flex;
+
+   flex-direction: column;
+
+  align-items: center;
+
+  justify-content:center;
+}
+.totalRepayAi_title{
+  margin-top: 5px;
+  color: #6C6C6C;
+}
+.totalRepayAi_value{
+  margin-top: 5px;
+  color: #3C3C3C	;
+  font-weight:bold; 
+  font-size:25px; 
+}
+.data_box{
+
+} */
+.detail_button_box{
+  padding: 0px 1px 0px 1px;
+  width: 100%;
+  bottom: 180rpx;
+  position: fixed;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+}
+.again_btn{
+  margin: 0px 10px 0px 10px;
+  padding: 1px 1px;
+  background-color: #1678ff;
+  border-radius: 30px;
+  font-size:15px ;
+  color:white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.share_btn{
+  margin: 0px 10px 0px 10px;
+  padding: 1px 1px;
+  background-color: white;
+  border-radius: 30px;
+  font-size:15px ;
+  color:#1678ff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.img_again{
+  height: 28px;
+  width: 28px;
+  margin-right: 4px;
+}
+.img_share{
+  height: 40px;
+  width: 40px;
 }

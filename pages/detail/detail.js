@@ -1,7 +1,8 @@
-// pages/detail/detail.js
+// pages/mortgage/detail/detail.js
 var CFHL = require("../../utils/calculatorForHouseLoan.js");
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
+
   /**
    * 页面的初始数据
    */
@@ -94,6 +95,9 @@ Page({
       activeIndex: e.currentTarget.id
     });
   },
+  bind_again(e){
+    wx.navigateBack()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -152,4 +156,16 @@ Page({
       }
     }
   }*/
+  onShareAppMessage: function () {
+    return {
+      title: '房贷计算器2022版',
+      path: '/pages/mortgage/mortgage',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  }
 })

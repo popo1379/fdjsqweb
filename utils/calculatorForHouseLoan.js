@@ -113,7 +113,7 @@ const calculate = function (loanTotal, interestRatePerMou, totalMouths) {
 
       // 等额本金第(i+1)个月需还利息
       let repayInterestPerMouAp = loanTotal * interestRatePerMou * (1 - (i - 1) / totalMouths);
-
+    
       // 等额本金第(i+1)个月还本带息
       let repayPerMouPriceAp = repayPrincipalPerMouAp + repayInterestPerMouAp;
 

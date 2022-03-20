@@ -13,42 +13,33 @@
         <view class="weui-tab__content"> 
           <view class="page-section">
             <view class="weui-cells weui-cells_after-title">
-              <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 1}}">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 1}}">
+                <view class="weui-cell__hd">
                   <view class="weui-label">商业贷利率：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <picker bindchange="rateChange0" value="{{rateIndex0}}" range="{{ratesName[0]}}">
-                    <view class="weui-select weui-select_in-select-after weui-cell__ft">{{ratesName[0][rateIndex0]}}</view>
-                  </picker>
+                  <input class="weui-input" type="digit" placeholder="请输入贷款利率" name="data0" value="{{rates}}" maxlength='6' bindinput="ratesChange"></input>
                 </view>
+                <view class="weui-cell__bd weui-cell__ft">%</view>
               </view>
-
-              <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 0}}">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}">
+                <view class="weui-cell__hd">
                   <view class="weui-label">公积金利率：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <picker bindchange="rateChange1" value="{{rateIndex1}}" range="{{ratesName[1]}}">
-                    <view class="weui-select weui-select_in-select-after weui-cell__ft">{{ratesName[1][rateIndex1]}}</view>
-                  </picker>
+                  <input class="weui-input" type="digit" placeholder="请输入贷款利率" name="data0" value="{{fundrates}}" maxlength='6' bindinput="fundratesChange"></input>
                 </view>
+                <view class="weui-cell__bd weui-cell__ft">%</view>
               </view>
             <view class="view_term"> 
               <view class="weui-cell weui-cell_select">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-cell__hd">
                   <view class="weui-label">贷款年限：</view>
-                <!-- </view>
-                <view class="weui-cell__bd">
-                  <picker bindchange="yearChange" value="{{yearIndex}}" range="{{years}}">
-                    <view class="weui-select weui-select_in-select-after weui-cell__ft">{{years[yearIndex]}}年</view>
-                  </picker>
-                </view> -->
                 </view>
                   <view class="weui-cell__bd weui-cell__ft">{{years}}年({{years*12}}期)
                   </view>
               </view>
-              <slider class="slider_term" min="1" max="30" value="{{years}}" bindchange="bind_term">
+              <slider class="slider_term" min="1" max="30" value="{{years}}" bindchanging="bind_term">
                 </slider>
               </view>
 
@@ -68,8 +59,8 @@
                   <view class="weui-label">贷款比例：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <picker bindchange="percentChange" value="{{percentIndex}}" range="{{percentArr}}">
-                    <view class="weui-select weui-select_in-select-after weui-cell__ft">{{percentArr[percentIndex]}}成</view>
+                  <picker bindchange="percentChange" value="{{percentIndex}}" range="{{percentArrName}}">
+                    <view class="weui-select weui-select_in-select-after weui-cell__ft">{{percentArrName[percentIndex]}}</view>
                   </picker>
                 </view>
               </view>
@@ -79,7 +70,7 @@
                   <view class="weui-label">商业总额：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" type="digit" placeholder="请输入总额" name="data0" value="{{commercialTotal}}" bindinput="commercialTotalChange"></input>
+                  <input class="weui-input" type="digit" placeholder="请输入总额"  value="{{commercialTotal}}" maxlength='12' bindinput="commercialTotalChange"></input>
                 </view>
                 <view class="weui-cell__bd weui-cell__ft">元</view>
               </view>
@@ -89,21 +80,34 @@
                   <view class="weui-label">公积金总额：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" type="digit" placeholder="请输入总额" name="data1" value="{{gjjTotal}}" bindinput="gjjTotalChange"></input>
+                  <input class="weui-input" type="digit" placeholder="请输入总额" value="{{gjjTotal}}" maxlength='12' bindinput="gjjTotalChange"></input>
                 </view>
                 <view class="weui-cell__bd weui-cell__ft">元</view>
               </view>
             </view>
-            <view class="btn-area">
-              <button type="primary" bindtap="showDetail" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal): (activeIndex==1?!gjjTotal: !commercialTotal)}}">计算</button>
-            </view>
-            <!-- <view class="page__hd baseline-explanation">
-              <view class="page__title">注意事项</view>
-              <view class="page__desc">
-                7成房贷作为国家给予每个人一生一次最大的福利，正确的使用方式是：
-                30年等额本息商业贷款，能贷多少贷多少！
+              <view class="view_policy">
+                <text class="text_policy" bindtap="bind_policy">房贷基础知识></text>
               </view>
-            </view> -->
+            <view class="view-ares">
+              <button class="btn_empty" bindtap="bind_Empty" style="width:40%">清空</button>
+              <view class="block_ares"style="width:3%" ></view>
+              <button class="btn_ares" bindtap="showDetail" style="width:57%" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal): (activeIndex==1?!gjjTotal: !commercialTotal)}}">计算</button>
+            </view>
+            <view class="view_share">
+              <button class="btn_share" catchtap="bind_share" style="width:100%" open-type='share'>
+              <image class="img_share" src="/style/icon/img_share.png" mode="aspectFit"></image>
+              <text class="text_share">分享给好友算一算</text>
+              </button>
+            </view>
+            <view class="view_latestLpr">
+            <text class="text_lprname">2022年2月21日最新报价利率：</text>
+              <view class="view_latestLpr_inside">
+                <view class="view_lateslpr_content" wx:for="{{baselpr}}" wx:key="item.key">
+                  <text class="text_lprname">{{item.name}}</text>
+                  <text class="text_lprcontent">{{item.content}}</text>
+                </view>
+              </view>
+            </view>
           </view>
         </view>
       </view>

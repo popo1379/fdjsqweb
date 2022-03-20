@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/mortgage/mortgage",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/policy/policy"
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#1AAD19",
+    "navigationBarBackgroundColor": "#1678ff",
     "backgroundTextStyle": "dark",
     "backgroundColor": "#f8f8f8",
     "navigationBarTitleText": "Finance"

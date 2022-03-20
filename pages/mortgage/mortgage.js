@@ -9,28 +9,25 @@ Page({
     activeIndex: 0,
     loansType: ['按房价总额', '按贷款总额'],
     loanIndex: 0,
-    ratesName: [
-      ['基准利率（4.6%）', '基准利率7折（3.22%）', '基准利率75折（3.45%）', '基准利率8折（3.68%）',
-        '基准利率85折（3.91%）', '基准利率9折（4.14%）', '基准利率95折（4.37%）', '基准利率1.05倍（4.83%）',
-        '基准利率1.1倍（5.06%）', '基准利率1.2倍（5.52%）', '基准利率1.3倍（5.98%）'],
-      ['基准利率（3.25%）', '基准利率7折（2.27%）', '基准利率75折（2.44%）', '基准利率8折（2.60%）',
-        '基准利率85折（2.76%）', '基准利率9折（2.93%）', '基准利率95折（3.09%）', '基准利率1.05倍（3.41%）',
-        '基准利率1.1倍（3.58%）', '基准利率1.2倍（3.90%）', '基准利率1.3倍（4.23%）']
-    ],
-    rates: [
-      [0.046, 0.0322, 0.0345, 0.0368, 0.0391, 0.0414, 0.0437, 0.0483, 0.0506, 0.0552, 0.0598],
-      [0.0325, 0.0227, 0.0244, 0.026, 0.0276, 0.0293, 0.0309, 0.0341, 0.0358, 0.039, 0.0423]
-    ],
+
+    rates: 4.60,
+    fundrates:3.25,
     rateIndex0: 0,
     rateIndex1: 0,
-    percentArr: [7, 6, 5, 4, 3, 2],
-    percentIndex: 0,
-    years:1,
+    percentArrName: ["8成","7.5成","7成","6.5成","6成","5.5成","5成","4.5成","4成","3.5成","3成","2.5成","2成"],
+    percentArr: [8,7.5,7,6.5, 6,5.5, 5,4.5, 4, 3.5,3,2.5,2],
+    percentIndex:2,
+    years:20,
     yearIndex: 0,
 
     sliderOffset: 0,
     sliderLeft: 0,
 
+    baselpr:[
+      { key: 0, name: "一年期利率",content: "3.70%"},
+      { key: 1, name: "五年期利率",content: "4.60%"},
+      { key: 2, name: "公积金利率",content: "3.25%"}
+    ],
   },
   onLoad: function () {
     var that = this;
@@ -49,6 +46,16 @@ Page({
   loanChange(e) {
     this.setData({
       loanIndex: e.detail.value
+    });
+  },
+  ratesChange(e) {
+    this.setData({
+      rates: e.detail.value
+    });
+  },
+  fundratesChange(e) {
+    this.setData({
+      fundrates: e.detail.value
     });
   },
   rateChange0(e) {
@@ -88,6 +95,20 @@ Page({
     }
     )
   },
+  bind_policy(e){
+    wx.navigateTo({
+      url: '/pages/policy/policy'
+    })
+  },
+  bind_Empty(e){
+    this.setData({
+      rates:null,
+      years:1,
+      commercialTotal: null,
+      gjjTotal: null,
+      fundrates:null,
+    })
+  },
 
   showDetail() {
     var commercialTotal;
@@ -97,8 +118,10 @@ Page({
     var totalMouths;
     commercialTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.commercialTotal : this.data.commercialTotal * this.data.percentArr[this.data.percentIndex] / 10;
     gjjTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.gjjTotal : this.data.gjjTotal * this.data.percentArr[this.data.percentIndex] / 10;
-    interestRatePerMou0 = this.data.rates[0][this.data.rateIndex0];
-    interestRatePerMou1 = this.data.rates[1][this.data.rateIndex1];
+    interestRatePerMou0 = this.data.rates*0.01;
+    interestRatePerMou1 = this.data.fundrates*0.01;
+    console.log(interestRatePerMou0);
+    console.log(interestRatePerMou1);
     totalMouths = this.data.years * 12;
     wx.navigateTo({
       url: '/pages/detail/detail?parentActiveIndex=' + this.data.activeIndex + '&commercialTotal=' + commercialTotal + '&gjjTotal=' + gjjTotal + '&interestRatePerMou0=' + interestRatePerMou0 + '&interestRatePerMou1=' + interestRatePerMou1 + '&totalMouths=' + totalMouths
@@ -109,13 +132,27 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    console.log("activeIndex: "+parseInt(this.data.activeIndex));
   },
+//   bind_share(e){
+//     return { 
+//       title: '房贷计算器2022版',//分享内容(为空则为当前页面文本)
+//       path:"pages/mortgage/mortgage",//分享地址 路径，传递参数到指定页面。(为空则为当前页面路径)
+//       // imageUrl: '../../imgs/xx.png',//分享的封面图(为空则为当前页面)
+// 　　　　success: function (res) {
+// 　　　　　　console.log("转发成功:" + JSON.stringify(res));
+// 　　　　},
+// 　　　　fail: function (res) {
+// 　　　　　　console.log("转发失败:" + JSON.stringify(res));
+// 　　　　}
+//   } 
+//   },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
     return {
-      title: '房贷计算',
+      title: '房贷计算器2022版',
       path: '/pages/mortgage/mortgage',
       success: function (res) {
         // 转发成功
