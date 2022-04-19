@@ -7,7 +7,7 @@ page,
     padding-bottom: 0;
 }
 .weui-tab__content{
-    padding-top: 15px;
+    padding-top: 15rpx;
 }
 
 .table {
@@ -64,6 +64,7 @@ page,
   display: flex;
   flex-direction:row;
   justify-content: space-around;
+  /* opacity: 0.8;   */
 }
 .again_btn{
   margin: 0px 10px 0px 10px;
@@ -98,4 +99,7 @@ page,
 .img_share{
   height: 40px;
   width: 40px;
+}
+.topbanner{
+  margin-top: 15rpx;
 }

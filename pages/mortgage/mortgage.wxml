@@ -10,6 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
+        <ad class="topbanner" unit-id="adunit-573df643dcc19e50"></ad>
         <view class="weui-tab__content"> 
           <view class="page-section">
             <view class="weui-cells weui-cells_after-title">
@@ -70,7 +71,7 @@
                   <view class="weui-label">商业总额：</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" type="digit" placeholder="请输入总额"  value="{{commercialTotal}}" maxlength='12' bindinput="commercialTotalChange"></input>
+                  <input class="weui-input" type="digit" placeholder="请输入总额"  value="{{commercialTotal}}" maxlength='11' bindinput="commercialTotalChange"></input>
                 </view>
                 <view class="weui-cell__bd weui-cell__ft">元</view>
               </view>
@@ -99,7 +100,7 @@
               <text class="text_share">分享给好友算一算</text>
               </button>
             </view>
-            <view class="view_latestLpr">
+            <view class="view_latestLpr">{{lprList.year}}
             <text class="text_lprname">2022年2月21日最新报价利率：</text>
               <view class="view_latestLpr_inside">
                 <view class="view_lateslpr_content" wx:for="{{baselpr}}" wx:key="item.key">

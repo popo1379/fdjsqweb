@@ -1,5 +1,5 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-
+const db = wx.cloud.database();//初始化数据库
 Page({
   data: {
     commercialTotal: 1000000,
@@ -19,10 +19,9 @@ Page({
     percentIndex:2,
     years:20,
     yearIndex: 0,
-
     sliderOffset: 0,
     sliderLeft: 0,
-
+    lprList:"",
     baselpr:[
       { key: 0, name: "一年期利率",content: "3.70%"},
       { key: 1, name: "五年期利率",content: "4.60%"},
@@ -41,7 +40,12 @@ Page({
     });
     console.log(parseInt(this.data.sliderLeft));
     console.log(parseInt(this.data.sliderOffset));
-  
+
+    wx.showLoading({
+      title: "数据加载中...",
+      mask: true
+    })
+    that.get_dblpr();
   },
   loanChange(e) {
     this.setData({
@@ -108,6 +112,11 @@ Page({
       gjjTotal: null,
       fundrates:null,
     })
+    wx.showToast({
+      title: '内容已清空',
+      icon: 'none',
+      duration: 1500
+    })
   },
 
   showDetail() {
@@ -134,6 +143,22 @@ Page({
     });
     console.log("activeIndex: "+parseInt(this.data.activeIndex));
   },
+  get_dblpr(){
+    let that = this;
+    db.collection('LPRlist').doc('bb4c2515625b74f6003334886f68a4fe').get({
+      success: function(res) {
+        // res.data 包含该记录的数据
+        console.log(res.data);
+        that.setData({
+          lprList:res.data
+        })
+        wx.hideLoading()
+        console.log(that.data.lprList);
+        console.log(that.data.lprList.year);
+      }
+    });
+  },
+
 //   bind_share(e){
 //     return { 
 //       title: '房贷计算器2022版',//分享内容(为空则为当前页面文本)

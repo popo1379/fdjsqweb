@@ -10,6 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
+        <ad class="topbanner" unit-id="adunit-573df643dcc19e50"></ad>
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view class="weui-form-preview">
             <!-- <view class="totalRepayAi_box">
@@ -234,7 +235,7 @@
     <view class="add-wrap"hover-class="plus-hover">
 </view>
   </view>
-  <view class="detail_button_box">
+  <view class="detail_button_box" style="opacity: {{hiddenDetail? 1: 0.8}}">
             <button class="again_btn"bindtap="bind_again" style="width:40%;margin: 0px 10px 0px 10px">
               <image class="img_again" src="/style/icon/img_again.png" mode="aspectFit"></image>
                 <text class="text_again">重新计算</text>

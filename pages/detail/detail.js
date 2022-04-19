@@ -1,6 +1,7 @@
 // pages/mortgage/detail/detail.js
 var CFHL = require("../../utils/calculatorForHouseLoan.js");
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+let interstitialAd = null; //广告
 Page({
 
   /**
@@ -34,11 +35,14 @@ Page({
     //等额本息详情
     repayPerMouObjAi: {},
     //等额本金详情
-    repayPerMouObjAp: {}
+    repayPerMouObjAp: {},
 
   },
   showDetail: function() {
     this.data.hiddenDetail = !this.data.hiddenDetail;
+    if(!this.data.hiddenDetail){
+      interstitialAd.show();
+    }
     this.setData({
       hiddenDetail: this.data.hiddenDetail
     });
@@ -88,6 +92,19 @@ Page({
         });
       }
     });
+    //广告组件
+    if(wx.createInterstitialAd){
+      interstitialAd = wx.createInterstitialAd({ adUnitId: 'adunit-640b57d8973f6b96' })
+      interstitialAd.onLoad(() => {
+        console.log('onLoad event emit')
+      })
+      interstitialAd.onError((err) => {
+        console.log('onError event emit', err)
+      })
+      interstitialAd.onClose((res) => {
+        console.log('onClose event emit', res)
+      })
+    }
   },
   tabClick: function (e) {
     this.setData({
