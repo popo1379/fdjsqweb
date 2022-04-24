@@ -50,7 +50,7 @@
               </view>
             </view>
             <view class="weui-form-preview__ft">
-              <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? "明细": "收起"}}</view>
+              <view class="weui-form-preview__btn weui-form-preview__btn_primary"  bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
           </view>
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">

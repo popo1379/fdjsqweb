@@ -9,7 +9,6 @@ Page({
     activeIndex: 0,
     loansType: ['按房价总额', '按贷款总额'],
     loanIndex: 0,
-
     rates: 4.60,
     fundrates:3.25,
     rateIndex0: 0,
@@ -22,6 +21,10 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     lprList:"",
+    ratesfocus:0,
+    fundratesfocus:0,
+    commercialTotalfocus:0,
+    gjjTotalfocus:0,
     baselpr:[
       { key: 0, name: "一年期利率",content: "3.70%"},
       { key: 1, name: "五年期利率",content: "4.60%"},
@@ -40,12 +43,12 @@ Page({
     });
     console.log(parseInt(this.data.sliderLeft));
     console.log(parseInt(this.data.sliderOffset));
-
-    wx.showLoading({
-      title: "数据加载中...",
-      mask: true
-    })
-    that.get_dblpr();
+    // 小程序云数据库逻辑，暂不启用
+    // wx.showLoading({
+    //   title: "数据加载中...",
+    //   mask: true
+    // })
+    // that.get_dblpr();
   },
   loanChange(e) {
     this.setData({
@@ -118,7 +121,66 @@ Page({
       duration: 1500
     })
   },
-
+  bind_ratesnullbtn(e){
+    this.setData({
+      rates:null,
+    })
+  },
+  bind_gjjratesnullbtn(e){
+    this.setData({
+      fundrates:null,
+    })
+  },
+  bind_commercialTotalbtn(e){
+    this.setData({
+      commercialTotal:null,
+    })
+  },
+  bind_gjjTotalbtn(e){
+    this.setData({
+      gjjTotal:null,
+    })
+  },
+  focus_ratesnullbut(e){
+    this.setData({
+      ratesfocus:1
+    })
+  },
+  blur_ratesnullbut(e){
+    this.setData({
+      ratesfocus:0
+    })
+  },
+  focus_fundratesnullbut(e){
+    this.setData({
+      fundratesfocus:1
+    })
+  },
+  blur_fundratesnullbut(e){
+    this.setData({
+      fundratesfocus:0
+    })
+  },
+  focus_commercialTotalnullbut(e){
+    this.setData({
+      commercialTotalfocus:1
+    })
+  },
+  blur_commercialTotalnullbut(e){
+    this.setData({
+      commercialTotalfocus:0
+    })
+  },
+  focus_gjjTotalnullbut(e){
+    this.setData({
+      gjjTotalfocus:1
+    })
+  },
+  blur_gjjTotalnullbut(e){
+    this.setData({
+      gjjTotalfocus:0
+    })
+  },
   showDetail() {
     var commercialTotal;
     var gjjTotal;

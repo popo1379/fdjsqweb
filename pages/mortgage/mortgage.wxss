@@ -110,3 +110,7 @@ page,
 .topbanner{
     margin-top: 15rpx;
 }
+.img_nullbtn{
+    height: 20px;
+    width: 20px;
+}
