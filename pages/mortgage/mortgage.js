@@ -1,16 +1,16 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-const db = wx.cloud.database();//初始化数据库
 Page({
   data: {
     commercialTotal: 1000000,
+    houseArea:100,
+    persqmPrice:10000,
     gjjTotal: 500000,
-
     tabs: ["商业贷款", "公积金贷款", "组合贷款"],
     activeIndex: 0,
-    loansType: ['按房价总额', '按贷款总额'],
+    loansType: ['按房价总额', '按贷款总额',"按房屋面积单价"],
     loanIndex: 0,
-    rates: 4.60,
-    fundrates:3.25,
+    rates:0,
+    fundrates:0,
     rateIndex0: 0,
     rateIndex1: 0,
     percentArrName: ["8成","7.5成","7成","6.5成","6成","5.5成","5成","4.5成","4成","3.5成","3成","2.5成","2成"],
@@ -25,13 +25,18 @@ Page({
     fundratesfocus:0,
     commercialTotalfocus:0,
     gjjTotalfocus:0,
+    totalTitle:"房价总额",
+    gjjtotalTitle:"房价总额",
     baselpr:[
       { key: 0, name: "一年期利率",content: "3.70%"},
       { key: 1, name: "五年期利率",content: "4.60%"},
       { key: 2, name: "公积金利率",content: "3.25%"}
     ],
+    newlist:"",
+    condition:false,
+    picurl:"cloud://mortgagecalculator-9d0fqf0fbb151.6d6f-mortgagecalculator-9d0fqf0fbb151-1311269700/"
   },
-  onLoad: function () {
+  async onLoad() {
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -41,19 +46,67 @@ Page({
         });
       }
     });
-    console.log(parseInt(this.data.sliderLeft));
     console.log(parseInt(this.data.sliderOffset));
-    // 小程序云数据库逻辑，暂不启用
-    // wx.showLoading({
-    //   title: "数据加载中...",
-    //   mask: true
-    // })
-    // that.get_dblpr();
+    wx.showLoading({
+      title: "数据加载中...",
+      mask: true
+    })
+    // 小程序云数据库逻辑
+    var c1 = new wx.cloud.Cloud({
+    // 资源方 小程序A的 AppID
+    resourceAppid: 'wx02933187189c34ad',
+    // 资源方 小程序A的 的云开发环境ID
+    resourceEnv: 'mortgagecalculator-9d0fqf0fbb151',
+    })
+    await c1.init()
+    c1.database().collection('LPRlist').doc('bb4c2515625b74f6003334886f68a4fe').get(
+    {
+      success: function(res) {
+        // res.data 包含该记录的数据
+        console.log(res.data);
+        that.setData({
+          lprList:res.data
+        })
+        that.setData({
+          rates:that.data.lprList.standardrate,
+          fundrates:that.data.lprList.gjjrate
+        })
+        wx.hideLoading()
+        console.log(that.data.lprList);
+        console.log(that.data.lprList.year);
+      }
+    })
+    function sortBy (field) {
+      //根据传过来的字段进行排序
+      return (x, y) => {
+        return x[field] - y[field]
+      }
+    }
+    c1.database().collection('Newlist').where({
+      _openid: 'new_data'
+    }).get({
+      success: function(res){
+        res.data.sort(sortBy("sort"))
+        // res.data 包含该记录的数据
+        console.log(res.data);
+        that.setData({
+          newlist:res.data,
+          condition:true
+        })
+      }
+    });
   },
   loanChange(e) {
     this.setData({
-      loanIndex: e.detail.value
+      loanIndex: e.detail.value,
     });
+    this.data.totalTitle=this.data.activeIndex==0&&this.data.loanIndex==0? "房价总额":"贷款总额"
+    this.data.gjjtotalTitle=this.data.activeIndex==1&&this.data.loanIndex==0?"房价总额":"公积金总额"
+    this.setData({
+      totalTitle:this.data.totalTitle,
+      gjjtotalTitle:this.data.gjjtotalTitle
+    })
+    console.log(this.data.loanIndex);
   },
   ratesChange(e) {
     this.setData({
@@ -90,6 +143,16 @@ Page({
       commercialTotal: e.detail.value
     });
   },
+  houseAreaChange(e) {
+    this.setData({
+      houseArea: e.detail.value
+    });
+  },
+  persqmPriceChange(e) {
+    this.setData({
+      persqmPrice: e.detail.value
+    });
+  },
   gjjTotalChange(e) {
     this.setData({
       gjjTotal: e.detail.value
@@ -114,11 +177,20 @@ Page({
       commercialTotal: null,
       gjjTotal: null,
       fundrates:null,
+      houseArea:null,
+      persqmPrice:null,
     })
     wx.showToast({
       title: '内容已清空',
       icon: 'none',
       duration: 1500
+    })
+  },
+  bind_newitem(e){
+    var idx = e.currentTarget.id;
+    console.log(this.data.newlist[idx].url);
+    wx.navigateTo({
+      url: '/pages/policy/policy'+"?wxurl="+encodeURIComponent(this.data.newlist[idx].url)
     })
   },
   bind_ratesnullbtn(e){
@@ -139,6 +211,36 @@ Page({
   bind_gjjTotalbtn(e){
     this.setData({
       gjjTotal:null,
+    })
+  },
+  bind_houseAreabtn(e){
+    this.setData({
+      houseArea:null,
+    })
+  },
+  blur_houseAreanullbut(e){
+    this.setData({
+      houseAreafocus:0
+    })
+  },
+  focus_houseAreanullbut(e){
+    this.setData({
+      houseAreafocus:1
+    })
+  },
+  bind_persqmPricebtn(e){
+    this.setData({
+      persqmPrice:null,
+    })
+  },
+  blur_persqmPricenullbut(e){
+    this.setData({
+      persqmPricefocus:0
+    })
+  },
+  focus_persqmPricenullbut(e){
+    this.setData({
+      persqmPricefocus:1
     })
   },
   focus_ratesnullbut(e){
@@ -181,14 +283,47 @@ Page({
       gjjTotalfocus:0
     })
   },
+  bind_wxyjbanner(e){
+    wx.navigateToMiniProgram({
+      appId: 'wx0f0148b20ef66721',
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })
+},
+//20230219新增贷款年限快速选择按钮
+  bind_10years(e){
+    this.setData({
+      years:10
+    })
+  },
+  bind_20years(e){
+    this.setData({
+      years:20
+    })
+  },
+  bind_30years(e){
+    this.setData({
+      years:30
+    })
+  },
   showDetail() {
     var commercialTotal;
     var gjjTotal;
     var interestRatePerMou0;
     var interestRatePerMou1;
     var totalMouths;
-    commercialTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.commercialTotal : this.data.commercialTotal * this.data.percentArr[this.data.percentIndex] / 10;
-    gjjTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.gjjTotal : this.data.gjjTotal * this.data.percentArr[this.data.percentIndex] / 10;
+    // commercialTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.commercialTotal : this.data.commercialTotal * this.data.percentArr[this.data.percentIndex] / 10;
+    // gjjTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.gjjTotal : this.data.gjjTotal * this.data.percentArr[this.data.percentIndex] / 10;
+    if(this.data.loanIndex == 2){
+      commercialTotal = this.data.houseArea * this.data.persqmPrice* this.data.percentArr[this.data.percentIndex] / 10;
+      gjjTotal = this.data.houseArea * this.data.persqmPrice* this.data.percentArr[this.data.percentIndex] / 10;
+    }
+    else{
+      commercialTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.commercialTotal : this.data.commercialTotal * this.data.percentArr[this.data.percentIndex] / 10;
+      gjjTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.gjjTotal : this.data.gjjTotal * this.data.percentArr[this.data.percentIndex] / 10;
+    }
     interestRatePerMou0 = this.data.rates*0.01;
     interestRatePerMou1 = this.data.fundrates*0.01;
     console.log(interestRatePerMou0);
@@ -203,16 +338,37 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    if(this.data.activeIndex==2){
+      this.data.totalTitle = "商业贷总额"
+      this.data.gjjtotalTitle = "公积金总额"
+      //屎山逻辑：解决新增房屋单价计算模式后loanIndex导致无法显示贷款金额栏的问题
+      this.setData({
+        loanIndex:0
+      })
+      console.log("loanIndex: "+parseInt(this.data.loanIndex));
+    }
+    else{
+      this.data.totalTitle=this.data.activeIndex==0&&this.data.loanIndex==0? "房价总额":"贷款总额"
+      this.data.gjjtotalTitle=this.data.activeIndex==1&&this.data.loanIndex==0?"房价总额":"公积金总额"
+    };
+    this.setData({
+      totalTitle:this.data.totalTitle,
+      gjjtotalTitle:this.data.gjjtotalTitle
+    });
     console.log("activeIndex: "+parseInt(this.data.activeIndex));
   },
   get_dblpr(){
     let that = this;
-    db.collection('LPRlist').doc('bb4c2515625b74f6003334886f68a4fe').get({
+    c1.collection('LPRlist').doc('bb4c2515625b74f6003334886f68a4fe').get({
       success: function(res) {
         // res.data 包含该记录的数据
         console.log(res.data);
         that.setData({
           lprList:res.data
+        })
+        that.setData({
+          rates:that.data.lprList.standardrate,
+          fundrates:that.data.lprList.gjjrate
         })
         wx.hideLoading()
         console.log(that.data.lprList);
@@ -220,7 +376,29 @@ Page({
       }
     });
   },
-
+  get_dbnew(){
+    let that = this;
+    function sortBy (field) {
+      //根据传过来的字段进行排序
+      return (x, y) => {
+        return x[field] - y[field]
+      }
+    }
+    c1.collection('Newlist').where({
+      _openid: 'new_data'
+    }).get({
+      success: function(res){
+        res.data.sort(sortBy("sort"))
+        // res.data 包含该记录的数据
+        console.log(res.data);
+        that.setData({
+          newlist:res.data,
+          condition:true
+        })
+        console.log(that.data.newlist);
+      }
+    });
+  },
 //   bind_share(e){
 //     return { 
 //       title: '房贷计算器2022版',//分享内容(为空则为当前页面文本)
@@ -239,7 +417,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '房贷计算器2022版',
+      title: '房贷计算器2023版',
       path: '/pages/mortgage/mortgage',
       success: function (res) {
         // 转发成功

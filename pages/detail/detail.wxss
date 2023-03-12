@@ -103,3 +103,20 @@ page,
 .topbanner{
   margin-top: 15rpx;
 }
+.banner_box{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  display: flex;
+  /* 让元素水平显示 */
+  flex-direction:column;
+  margin-top: 10rpx;
+}
+.banner_item{
+  width: 370px;
+  border-radius: 5px;
+}
+.text_lprname{
+  font-size: small;
+  margin: 10rpx;
+  color: #999;
+}

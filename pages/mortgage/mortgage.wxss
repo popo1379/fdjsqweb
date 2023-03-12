@@ -75,7 +75,7 @@ page,
     display: flex;
     /* 让元素水平显示 */
     flex-direction:column;
-    margin-top: 40rpx;
+    margin-top: 10rpx;
 }
 .view_latestLpr_inside{
     background-color:white;
@@ -85,8 +85,6 @@ page,
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
-
 }
 .view_lateslpr_content{
     display: flex;
@@ -94,10 +92,8 @@ page,
     align-items: center;
 }
 .text_lprname{
-    
     font-size: small;
     margin: 10rpx 0;
-
     color: #999;
 }
 .text_lprcontent{
@@ -113,4 +109,71 @@ page,
 .img_nullbtn{
     height: 20px;
     width: 20px;
+}
+.banner_box{
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    display: flex;
+    /* 让元素水平显示 */
+    flex-direction:column;
+    margin-top: 1rpx;
+}
+
+.banner_item{
+    width:100%;
+    border-radius: 5px;
+}
+.newlist_box{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  display: flex;
+  /* 让元素水平显示 */
+  flex-direction:column;
+  margin-top: 5rpx;
+}
+.new_item{
+  background-color: white ;
+  height: 150rpx;
+  margin-bottom: 10rpx;
+  padding: 10rpx 25rpx 10rpx 20rpx;
+  border-radius: 5px;
+  display: flex;
+  flex-direction:row;
+  justify-content: column;
+  align-items: center;
+}
+.new_img{
+  height: 150rpx;
+  width:200rpx;
+  border-radius: 5px;
+  overflow:hidden;
+  display:inline-block;
+}
+.new_titlebox{
+  margin-left: 20rpx;
+  height: 100%;
+  width: 500rpx;
+}
+.new_title{
+  color: rgb(58, 54, 54);
+  font-size:30rpx;
+}
+.view_yearsbtnbox{
+  display: flex;
+  /* 让元素水平显示 */
+  flex-direction: row;
+  /* 元素位于横轴两端 */
+  justify-content: space-between;
+}
+.btn_years{
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  color:#545557;
+  width: 100%;
+  font-weight:500;
+}
+.text_morename{
+  font-size: small;
+  margin: 5rpx 0rpx 10rpx 0rpx;
+  color: #999;
 }

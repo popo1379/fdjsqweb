@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <ad class="topbanner" unit-id="adunit-573df643dcc19e50"></ad>
+        <ad class="topbanner" unit-id="adunit-ba0f19d27bee479d"></ad>
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view class="weui-form-preview">
             <!-- <view class="totalRepayAi_box">
@@ -53,6 +53,12 @@
               <view class="weui-form-preview__btn weui-form-preview__btn_primary"  bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
           </view>
+          <!-- <view class="banner_box" hidden="{{!hiddenDetail}}" >
+              <text class="text_lprname">更多推荐</text>
+              <view class="banner_list">
+              <image class="banner_item" bindtap="bind_wxyjbanner" src="/style/icon/wxyjbanner.png" mode="widthFix"></image>
+            </view>
+            </view> -->
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">
             <view class="weui-flex">
               <view class="weui-flex__item">
@@ -118,7 +124,7 @@
               </view>
             </view>
             <view class="weui-form-preview__ft">
-              <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? "明细": "收起"}}</view>
+              <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
           </view>
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">
@@ -188,7 +194,7 @@
               </view>
             </view>
             <view class="weui-form-preview__ft">
-              <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? "明细": "收起"}}</view>
+              <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
           </view>
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">

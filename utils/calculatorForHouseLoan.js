@@ -167,7 +167,6 @@ const calculate = function (loanTotal, interestRatePerMou, totalMouths) {
     //等额本金详情
     repayPerMouObjAp: repayPerMouObj.repayPerMouObjAp
   }
-
 };
 
 module.exports = {

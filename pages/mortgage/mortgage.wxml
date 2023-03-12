@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <ad class="topbanner" unit-id="adunit-573df643dcc19e50"></ad>
+        <ad class="topbanner" unit-id="adunit-ba0f19d27bee479d"></ad>
         <view class="weui-tab__content"> 
           <view class="page-section">
             <view class="weui-cells weui-cells_after-title">
@@ -43,8 +43,13 @@
                   </view>
               </view>
               <slider class="slider_term" min="1" max="30" value="{{years}}" bindchanging="bind_term">
-                </slider>
+              </slider>
+              <view class="view_yearsbtnbox">
+                <button class="btn_years" style="height:60rpx;width:180rpx;background-color:#F5F5F5;" catchtap="bind_10years" >10年</button>
+                <button class="btn_years" style="height:60rpx;width:180rpx;background-color:#F5F5F5;" catchtap="bind_20years" >20年</button>
+                <button class="btn_years" style="height:60rpx;width:180rpx;background-color:#F5F5F5;" catchtap="bind_30years" >30年</button>
               </view>
+            </view>
 
               <view class="weui-cell weui-cell_select" hidden="{{activeIndex == 2}}">
                 <view class="weui-cell__hd weui-cell__hd_in-select-after">
@@ -57,7 +62,7 @@
                 </view>
               </view>
 
-              <view class="weui-cell weui-cell_select" hidden="{{loanIndex != 0 || activeIndex == 2}}">
+              <view class="weui-cell weui-cell_select" hidden="{{loanIndex == 1 || activeIndex == 2}}">
                 <view class="weui-cell__hd weui-cell__hd_in-select-after">
                   <view class="weui-label">贷款比例：</view>
                 </view>
@@ -67,10 +72,31 @@
                   </picker>
                 </view>
               </view>
-
-              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 1}}">
+              <!-- 20230215新增按房屋面积单价模式 -->
+              <view class="weui-cell weui-cell_input" hidden="{{loanIndex != 2|| activeIndex == 2}}">
                 <view class="weui-cell__hd">
-                  <view class="weui-label">{{activeIndex==0&&loanIndex==0? "房价总额":"贷款总额"}}：</view>
+                  <view class="weui-label">房屋面积：</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" type="digit" placeholder="请输入房屋面积"  value="{{houseArea}}" maxlength='13' bindinput="houseAreaChange" bindfocus="focus_houseAreanullbut" bindblur="blur_houseAreanullbut"></input>
+                </view>
+                <image class="img_nullbtn" src="/style/icon/img_inputnull.png" bindtap="bind_houseAreabtn" mode="aspectFit" hidden="{{houseArea&&houseAreafocus==1?false:true}}"></image>
+                <view class="weui-cell__ft">平方米</view>
+              </view>
+              <view class="weui-cell weui-cell_input" hidden="{{loanIndex != 2|| activeIndex == 2}}">
+                <view class="weui-cell__hd">
+                  <view class="weui-label">平米单价：</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" type="digit" placeholder="请输入每平米单价"  value="{{persqmPrice}}" maxlength='13' bindinput="persqmPriceChange" bindfocus="focus_persqmPricenullbut" bindblur="blur_persqmPricenullbut"></input>
+                </view>
+                <image class="img_nullbtn" src="/style/icon/img_inputnull.png" bindtap="bind_persqmPricebtn" mode="aspectFit" hidden="{{persqmPrice&&persqmPricefocus==1?false:true}}"></image>
+                <view class="weui-cell__ft">元/平米</view>
+              </view>
+              <!-- 20230215新增结束 -->
+              <view class="weui-cell weui-cell_input" hidden="{{loanIndex == 2||activeIndex == 1}}">
+                <view class="weui-cell__hd">
+                  <view class="weui-label"> {{totalTitle}}：</view>
                 </view>
                 <view class="weui-cell__bd">
                   <input class="weui-input" type="digit" placeholder="请输入总额"  value="{{commercialTotal}}" maxlength='13' bindinput="commercialTotalChange" bindfocus="focus_commercialTotalnullbut" bindblur="blur_commercialTotalnullbut"></input>
@@ -79,9 +105,9 @@
                 <view class="weui-cell__ft">元</view>
               </view>
 
-              <view class="weui-cell weui-cell_input" hidden="{{activeIndex == 0}}">
+              <view class="weui-cell weui-cell_input" hidden="{{loanIndex == 2 ||activeIndex == 0}}">
                 <view class="weui-cell__hd">
-                  <view class="weui-label">公积金总额：</view>
+                  <view class="weui-label">{{gjjtotalTitle}}：</view>
                 </view>
                 <view class="weui-cell__bd">
                   <input class="weui-input" type="digit" placeholder="请输入总额" value="{{gjjTotal}}" maxlength='12' bindinput="gjjTotalChange"  bindfocus="focus_gjjTotalnullbut" bindblur="blur_gjjTotalnullbut"></input>
@@ -90,13 +116,11 @@
                 <view class="weui-cell__ft">元</view>
               </view>
             </view>
-              <view class="view_policy">
-                <text class="text_policy" bindtap="bind_policy">房贷基础知识></text>
-              </view>
             <view class="view-ares">
               <button class="btn_empty" bindtap="bind_Empty" style="width:40%">清空</button>
               <view class="block_ares"style="width:3%" ></view>
-              <button class="btn_ares" bindtap="showDetail" style="width:57%" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal): (activeIndex==1?!gjjTotal: !commercialTotal)}}">计算</button>
+              <!-- <button class="btn_ares" bindtap="showDetail" style="width:57%" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal): (activeIndex==1?!gjjTotal: !commercialTotal)}}">计算</button> -->
+              <button class="btn_ares" bindtap="showDetail" style="width:57%" disabled="{{activeIndex==2?!(commercialTotal&&gjjTotal&&fundrates&&rates): (activeIndex==1?(loanIndex==2?!(houseArea&&persqmPrice&&fundrates):!(gjjTotal&&fundrates)): (loanIndex==2?!(houseArea&&persqmPrice&&rates):!(commercialTotal&&rates)))}}">计算</button>
             </view>
             <view class="view_share">
               <button class="btn_share" catchtap="bind_share" style="width:100%" open-type='share'>
@@ -104,15 +128,15 @@
               <text class="text_share">分享给好友算一算</text>
               </button>
             </view>
-            <view class="view_latestLpr">{{lprList.year}}
-            <text class="text_lprname">2022年2月21日最新报价利率：</text>
+            <!-- <view class="view_latestLpr">{{lprList.year}}
+            <text class="text_lprname">2022年2月21日最新报价利率</text>
               <view class="view_latestLpr_inside">
                 <view class="view_lateslpr_content" wx:for="{{baselpr}}" wx:key="item.key">
                   <text class="text_lprname">{{item.name}}</text>
                   <text class="text_lprcontent">{{item.content}}</text>
-                </view>
-                <!-- <view class="view_latestLpr">
-            <text class="text_lprname">{{lprList.timestr}}最新报价利率：</text>
+                </view> -->
+                <view class="view_latestLpr">
+            <text class="text_lprname">{{lprList.timestr}}</text>
               <view class="view_latestLpr_inside">
                 <view class="view_lateslpr_content">
                   <text class="text_lprname">一年期利率</text>
@@ -125,10 +149,27 @@
                 <view class="view_lateslpr_content">
                   <text class="text_lprname">公积金利率</text>
                   <text class="text_lprcontent">{{lprList.gjjlpr}}</text>
-                </view> -->
+                </view>
               </view>
             </view>
-          </view>
+            <view class="newlist_box">
+              <text class="text_lprname">房产最新资讯</text>
+              <view class="new_list" wx:key="index" wx:for="{{newlist}}">
+                <view class="new_item" id="{{index}}" bindtap="bind_newitem">
+                  <image class="new_img" src="{{item.httpimg}}" mode="aspectFit"></image>
+                  <view class="new_titlebox">
+                    <text class="new_title">{{item.title}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="banner_box">
+              <text class="text_morename">更多工具推荐</text>
+                <view class="banner_list">
+                  <image class="banner_item" bindtap="bind_wxyjbanner" src="/style/icon/wxyjbanner.png" mode="widthFix"></image>
+                </view>
+              </view>
+            </view>
         </view>
       </view>
     </view>

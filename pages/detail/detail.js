@@ -55,7 +55,6 @@ Page({
       title: "数据加载中...",
       mask: true
     })
-
     var detail;
     if (e.parentActiveIndex == 0) {
       detail = CFHL.calculate(+e.commercialTotal, +e.interestRatePerMou0 / 12, +e.totalMouths);
@@ -92,9 +91,8 @@ Page({
         });
       }
     });
-    //广告组件
     if(wx.createInterstitialAd){
-      interstitialAd = wx.createInterstitialAd({ adUnitId: 'adunit-640b57d8973f6b96' })
+      interstitialAd = wx.createInterstitialAd({ adUnitId: 'adunit-b0ff359ddad53c95' })
       interstitialAd.onLoad(() => {
         console.log('onLoad event emit')
       })
@@ -175,7 +173,7 @@ Page({
   }*/
   onShareAppMessage: function () {
     return {
-      title: '房贷计算器2022版',
+      title: '房贷计算器2023版',
       path: '/pages/mortgage/mortgage',
       success: function (res) {
         // 转发成功
