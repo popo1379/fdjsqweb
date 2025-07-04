@@ -1,0 +1,267 @@
+<view class="container">
+  <!-- 模式切换 Tab -->
+  <view class="card tab-container">
+    <view 
+      class="tab-item {{currentTab === 0 ? 'active' : ''}}" 
+      bindtap="switchTab" data-index="0"
+    >
+      <icon type="home" size="20" /> 二手房税费
+    </view>
+    <view 
+      class="tab-item {{currentTab === 1 ? 'active' : ''}}" 
+      bindtap="switchTab" data-index="1"
+    >
+      <icon type="home" size="20" /> 新房税费
+    </view>
+  </view>
+
+  <!-- 二手房输入区域 -->
+  <view wx:if="{{currentTab === 0}}">
+    <view class="card">
+      <view class="section-title">
+        <icon type="home" size="24" /> 房屋基本信息
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="form" size="20" /> 房屋面积 (m²)
+        </view>
+        <input 
+          class="input-field" 
+          type="digit" 
+          placeholder="请输入房屋面积" 
+          value="{{usedHouse.houseArea}}"
+          bindinput="bindInput" 
+          data-type="used" 
+          data-field="houseArea"
+        />
+        <view class="input-tip">例如：95.3</view>
+      </view>
+
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="money" size="20" /> 房屋总价 (万元)
+        </view>
+        <input 
+          class="input-field" 
+          type="digit" 
+          placeholder="请输入房屋总价" 
+          value="{{usedHouse.totalPrice}}"
+          bindinput="bindInput" 
+          data-type="used" 
+          data-field="totalPrice"
+        />
+        <view class="input-tip">例如：350.5</view>
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="form" size="20" /> 原登记价 (万元)
+        </view>
+        <input 
+          class="input-field" 
+          type="digit" 
+          placeholder="请输入原登记价" 
+          value="{{usedHouse.originalPrice}}"
+          bindinput="bindInput" 
+          data-type="used" 
+          data-field="originalPrice"
+        />
+        <view class="input-tip">原始购房价格</view>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="time" size="24" /> 购置情况
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="time" size="20" /> 购置年限
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{usedHouse.yearsOption === '满5年' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="yearsOption" data-value="满5年"
+          >满5年</view>
+          <view 
+            class="selector-item {{usedHouse.yearsOption === '满2年不足5年' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="yearsOption" data-value="满2年不足5年"
+          >满2年不足5年</view>
+          <view 
+            class="selector-item {{usedHouse.yearsOption === '不足2年' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="yearsOption" data-value="不足2年"
+          >不足2年</view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="home" size="24" /> 房屋类型
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="form" size="20" /> 房产类型
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{usedHouse.houseType === '普通住宅' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="houseType" data-value="普通住宅"
+          >普通住宅</view>
+          <view 
+            class="selector-item {{usedHouse.houseType === '非普通住宅' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="houseType" data-value="非普通住宅"
+          >非普通住宅</view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="people" size="24" /> 卖家信息
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="people" size="20" /> 卖家持有情况
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{usedHouse.sellerSituation === '家庭唯一' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="sellerSituation" data-value="家庭唯一"
+          >家庭唯一</view>
+          <view 
+            class="selector-item {{usedHouse.sellerSituation === '非家庭唯一' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="sellerSituation" data-value="非家庭唯一"
+          >非家庭唯一</view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="my" size="24" /> 买家信息
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="my" size="20" /> 买家是否首套
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{usedHouse.isFirstBuy === '首套' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="isFirstBuy" data-value="首套"
+          >首套</view>
+          <view 
+            class="selector-item {{usedHouse.isFirstBuy === '非首套' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="used" data-field="isFirstBuy" data-value="非首套"
+          >非首套</view>
+        </view>
+      </view>
+      <view class="warning">
+        <icon type="warn" size="24" />
+        <text>普通住宅指面积≤144㎡且容积率≥1.0</text>
+      </view>
+    </view>
+    
+    <button class="btn-primary" bindtap="calculateTax">计算税费 →</button>
+  </view>
+
+  <!-- 新房输入区域 -->
+  <view wx:if="{{currentTab === 1}}">
+    <view class="card">
+      <view class="section-title">
+        <icon type="home" size="24" /> 房屋基本信息
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="form" size="20" /> 房屋面积 (m²)
+        </view>
+        <input 
+          class="input-field" 
+          type="digit" 
+          placeholder="请输入房屋面积" 
+          value="{{newHouse.houseArea}}"
+          bindinput="bindInput" 
+          data-type="new" 
+          data-field="houseArea"
+        />
+        <view class="input-tip">例如：110.5</view>
+      </view>
+
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="money" size="20" /> 房屋总价 (万元)
+        </view>
+        <input 
+          class="input-field" 
+          type="digit" 
+          placeholder="请输入房屋总价" 
+          value="{{newHouse.totalPrice}}"
+          bindinput="bindInput" 
+          data-type="new" 
+          data-field="totalPrice"
+        />
+        <view class="input-tip">例如：420.8</view>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="home" size="24" /> 房屋类型
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="form" size="20" /> 房产类型
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{newHouse.houseType === '普通住宅' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="new" data-field="houseType" data-value="普通住宅"
+          >普通住宅</view>
+          <view 
+            class="selector-item {{newHouse.houseType === '非普通住宅' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="new" data-field="houseType" data-value="非普通住宅"
+          >非普通住宅</view>
+        </view>
+      </view>
+      <view class="warning">
+        <icon type="warn" size="24" />
+        <text>普通住宅指面积≤144㎡且容积率≥1.0</text>
+      </view>
+    </view>
+    
+    <view class="card">
+      <view class="section-title">
+        <icon type="my" size="24" /> 买家信息
+      </view>
+      
+      <view class="input-group">
+        <view class="input-label">
+          <icon type="my" size="20" /> 买家购房情况
+        </view>
+        <view class="selector-group">
+          <view 
+            class="selector-item {{newHouse.buyerSituation === '首套' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="new" data-field="buyerSituation" data-value="首套"
+          >首套</view>
+          <view 
+            class="selector-item {{newHouse.buyerSituation === '二套' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="new" data-field="buyerSituation" data-value="二套"
+          >二套</view>
+          <view 
+            class="selector-item {{newHouse.buyerSituation === '三套及以上' ? 'active' : ''}}"
+            bindtap="setSelector" data-type="new" data-field="buyerSituation" data-value="三套及以上"
+          >三套及以上</view>
+        </view>
+      </view>
+    </view>
+    
+    <button class="btn-primary" bindtap="calculateTax">计算税费 →</button>
+  </view>
+</view>

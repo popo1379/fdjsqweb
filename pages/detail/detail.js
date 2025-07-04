@@ -12,16 +12,15 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-
+    downPay:0,
+    loanIndex:1,
     hiddenDetail: true,
-
     parentActiveIndex: 0,
     commercialTotal: 0,
     gjjTotal: 0,
     interestRatePerMou0: 0,
     interestRatePerMou1: 0,
     totalMouths: 0,
-
     loanTotal: 0, //贷款总额
     totalInterestAi: 0, //等额本息总还款利息
     totalRepayAi: 0, //总还本带息
@@ -41,7 +40,7 @@ Page({
   showDetail: function() {
     this.data.hiddenDetail = !this.data.hiddenDetail;
     if(!this.data.hiddenDetail){
-      interstitialAd.show();
+      //interstitialAd.show();
     }
     this.setData({
       hiddenDetail: this.data.hiddenDetail
@@ -91,18 +90,35 @@ Page({
         });
       }
     });
-    if(wx.createInterstitialAd){
-      interstitialAd = wx.createInterstitialAd({ adUnitId: 'adunit-b0ff359ddad53c95' })
-      interstitialAd.onLoad(() => {
-        console.log('onLoad event emit')
-      })
-      interstitialAd.onError((err) => {
-        console.log('onError event emit', err)
-      })
-      interstitialAd.onClose((res) => {
-        console.log('onClose event emit', res)
-      })
+    //首付逻辑
+    if(e.loanIndex==0 || 2){
+      this.setData({downPay:e.downPay,loanIndex:e.loanIndex,parentActiveIndex:e.parentActiveIndex})
     }
+    console.log("loanIndex:"+parseInt(this.data.loanIndex));
+    console.log("parentActiveIndex:"+parseInt(this.data.parentActiveIndex));
+    console.log(detail);
+    this.setData({ ...e, ...detail}, () => { wx.hideLoading() });
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
+    // if(wx.createInterstitialAd){
+    //   interstitialAd = wx.createInterstitialAd({ adUnitId: 'adunit-14d1d014c858fcb0' })
+    //   interstitialAd.onLoad(() => {
+    //     console.log('onLoad event emit')
+    //   })
+    //   interstitialAd.onError((err) => {
+    //     console.log('onError event emit', err)
+    //   })
+    //   interstitialAd.onClose((res) => {
+    //     console.log('onClose event emit', res)
+    //   })
+    // }
   },
   tabClick: function (e) {
     this.setData({
@@ -173,7 +189,7 @@ Page({
   }*/
   onShareAppMessage: function () {
     return {
-      title: '房贷计算器2023版',
+      title: '房贷计算器2025',
       path: '/pages/mortgage/mortgage',
       success: function (res) {
         // 转发成功

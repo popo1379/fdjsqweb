@@ -1,5 +1,5 @@
-<view class="page">
-  <view class="page__bd">
+<scroll-view class="page">
+  <view class="page__bd" style="height:{{mapheight}}px">
     <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <ad class="topbanner" unit-id="adunit-ba0f19d27bee479d"></ad>
+         <!-- <ad unit-id="adunit-dcf321067325ce20" bindload="adLoad" binderror="adError" bindclose="adClose"></ad> -->
         <view class="weui-tab__content"> 
           <view class="page-section">
             <view class="weui-cells weui-cells_after-title">
@@ -136,22 +136,59 @@
                   <text class="text_lprcontent">{{item.content}}</text>
                 </view> -->
                 <view class="view_latestLpr">
-            <text class="text_lprname">{{lprList.timestr}}</text>
-              <view class="view_latestLpr_inside">
-                <view class="view_lateslpr_content">
-                  <text class="text_lprname">一年期利率</text>
-                  <text class="text_lprcontent">{{lprList.oneyearlpr}}</text>
+                  <text class="text_lprname">{{lprList.timestr}}</text>
+                    <view class="view_latestLpr_inside">
+                      <view class="view_lateslpr_content">
+                        <text class="text_lprname">一年期利率</text>
+                        <text class="text_lprcontent">{{lprList.oneyearlpr}}</text>
+                      </view>
+                      <view class="view_lateslpr_content">
+                        <text class="text_lprname">五年期利率</text>
+                        <text class="text_lprcontent">{{lprList.fiveyearlpr}}</text>
+                      </view>
+                      <view class="view_lateslpr_content">
+                        <text class="text_lprname">公积金利率</text>
+                        <text class="text_lprcontent">{{lprList.gjjlpr}}</text>
+                      </view>
+                 </view>
+            </view>
+            <!-- 更多工具入口 -->
+            <view class="container">
+              <text class="text_lprname">更多计算工具</text>
+              <!-- 白色卡片 -->
+              <view class="card">
+                <!-- 卡片标题 -->
+                <!-- <view class="card-header">
+                  <text class="card-title">金融计算工具</text>
+                  <text class="card-subtitle">选择您需要的计算工具</text>
+                </view> -->
+        
+                <!-- 按钮容器 - 并排排列 -->
+                <view class="button-container row">
+                  <!-- 提前还贷计算器按钮 -->
+                  <view class="button loan-btn" bindtap="navigateToLoanCalculator">
+                    <icon class="button-icon" type="waiting" size="24" color="#fff"></icon>
+                    <text class="button-text">提前还贷计算器</text>
+                  </view>
+                  
+                  <!-- 房屋税费计算器按钮 -->
+                  <view class="button tax-btn" bindtap="navigateToTaxCalculator">
+                    <icon class="button-icon" type="info" size="24" color="#fff"></icon>
+                    <text class="button-text">房屋税费计算器</text>
+                  </view>
                 </view>
-                <view class="view_lateslpr_content">
-                  <text class="text_lprname">五年期利率</text>
-                  <text class="text_lprcontent">{{lprList.fiveyearlpr}}</text>
-                </view>
-                <view class="view_lateslpr_content">
-                  <text class="text_lprname">公积金利率</text>
-                  <text class="text_lprcontent">{{lprList.gjjlpr}}</text>
+                
+                <!-- 卡片底部装饰 -->
+                <view class="card-footer">
+                  <view class="footer-line"></view>
+                  <text class="footer-text">房贷计算器博时版</text>
+                  <view class="footer-line"></view>
                 </view>
               </view>
             </view>
+
+
+
             <view class="newlist_box">
               <text class="text_lprname">房产最新资讯</text>
               <view class="new_list" wx:key="index" wx:for="{{newlist}}">
@@ -163,15 +200,15 @@
                 </view>
               </view>
             </view>
-            <view class="banner_box">
+            <!-- <view class="banner_box">
               <text class="text_morename">更多工具推荐</text>
                 <view class="banner_list">
                   <image class="banner_item" bindtap="bind_wxyjbanner" src="/style/icon/wxyjbanner.png" mode="widthFix"></image>
-                </view>
-              </view>
+                </view> 
+              </view> -->
             </view>
         </view>
       </view>
     </view>
   </view>
-</view>
+</scroll-view>

@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <ad class="topbanner" unit-id="adunit-ba0f19d27bee479d"></ad>
+       <!-- <ad unit-id="adunit-dcf321067325ce20" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>-->
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view class="weui-form-preview">
             <!-- <view class="totalRepayAi_box">
@@ -39,6 +39,10 @@
               <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">贷款总额</view>
                 <view class="weui-form-preview__value">{{loanTotal}}</view>
+              </view>
+              <view class="weui-form-preview__item"  hidden="{{parentActiveIndex == 2 || loanIndex == 1}}">
+                <view class="weui-form-preview__label">房款首付</view>
+                <view class="weui-form-preview__value">{{downPay}}</view>
               </view>
               <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">总利息</view>
@@ -114,6 +118,10 @@
                 <view class="weui-form-preview__label">贷款总额</view>
                 <view class="weui-form-preview__value">{{loanTotal}}</view>
               </view>
+              <view class="weui-form-preview__item"  hidden="{{parentActiveIndex == 2 || loanIndex == 1}}">
+                <view class="weui-form-preview__label">房款首付</view>
+                <view class="weui-form-preview__value">{{downPay}}</view>
+              </view>
               <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">总利息</view>
                 <view class="weui-form-preview__value">{{totalInterestAp}}</view>
@@ -183,6 +191,10 @@
               <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">贷款总额</view>
                 <view class="weui-form-preview__value">{{loanTotal}}</view>
+              </view>
+              <view class="weui-form-preview__item"  hidden="{{parentActiveIndex == 2 || loanIndex == 1}}">
+                <view class="weui-form-preview__label">房款首付</view>
+                <view class="weui-form-preview__value">{{downPay}}</view>
               </view>
               <view class="weui-form-preview__item">
                 <view class="weui-form-preview__label">总利息</view>

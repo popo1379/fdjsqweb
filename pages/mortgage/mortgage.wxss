@@ -177,3 +177,133 @@ page,
   margin: 5rpx 0rpx 10rpx 0rpx;
   color: #999;
 }
+/* 页面样式 */
+.container {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  display: flex;
+  /* 让元素水平显示 */
+  flex-direction:column;
+  margin-top: 30rpx;
+}
+/* 更多工具卡片样式 */
+.card {
+  width: 90%;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  padding: 40rpx;
+}
+
+/* 卡片头部样式 */
+.card-header {
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.card-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.card-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* 按钮容器 - 并排布局 */
+.button-container.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30rpx;
+}
+
+/* 按钮通用样式 */
+.button {
+  flex: 1; /* 等分宽度 */
+  height: 40rpx; /* 增加高度以适应并排布局 */
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column; /* 垂直排列图标和文字 */
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* 按钮图标 */
+.button-icon {
+  margin-bottom: 10rpx; /* 图标和文字之间的间距 */
+  z-index: 2;
+}
+
+/* 按钮文字 */
+.button-text {
+  font-size: 24rpx; /* 稍微减小字号以适应宽度 */
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* 提前还贷按钮样式 */
+.loan-btn {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 10rpx 20rpx rgba(106, 17, 203, 0.3);
+}
+
+/* 房屋税费按钮样式 */
+.tax-btn {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  box-shadow: 0 10rpx 20rpx rgba(17, 153, 142, 0.3);
+}
+
+/* 按钮的渐变覆盖层（用于悬停效果） */
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.button:active::after {
+  opacity: 1;
+}
+
+/* 卡片底部样式 */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+
+.footer-line {
+  flex: 1;
+  height: 1rpx;
+  background-color: #eeeeee;
+}
+
+.footer-text {
+  padding: 0 30rpx;
+  font-size: 24rpx;
+  color: #999999;
+}

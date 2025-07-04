@@ -2,7 +2,10 @@
   "pages": [
     "pages/mortgage/mortgage",
     "pages/detail/detail",
-    "pages/policy/policy"
+    "pages/policy/policy",
+    "pages/tiqianhuandai/tiqianhuandai",
+    "pages/fangwushuifeiindex/fangwushuifeiindex",
+    "pages/fangwushuifeiresult/fangwushuifeiresult"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,0 +1,339 @@
+/* 全局样式 */
+page {
+  background-color: #f8f9fa;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 20rpx;
+}
+
+/* 容器样式 */
+.container {
+  padding: 20rpx;
+}
+
+/* 标题栏 */
+.header {
+  text-align: center;
+  padding: 30rpx 0 40rpx;
+}
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+  color: #1a73e8;
+}
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  display: block;
+}
+
+/* 表单部分 */
+.form-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 25rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.03);
+}
+.section-title {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 25rpx;
+  display: block;
+  color: #333;
+  position: relative;
+  padding-left: 15rpx;
+}
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 32rpx;
+  background-color: #1a73e8;
+  border-radius: 4rpx;
+}
+
+/* 单选按钮组 */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15rpx;
+}
+.radio {
+  margin-right: 25rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+  font-size: 15px;
+}
+
+/* 表单项 */
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.label {
+  width: 240rpx;
+  font-size: 15px;
+  color: #555;
+  flex-shrink: 0;
+}
+.input, .picker {
+  flex: 1;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  padding: 10rpx 25rpx;
+  font-size: 15px;
+  min-height: 60rpx;
+  box-sizing: border-box;
+}
+.picker {
+  display: flex;
+  align-items: center;
+}
+.picker-value {
+  color: #666;
+}
+
+/* 计算按钮 */
+.calculate-btn {
+  background: linear-gradient(135deg, #1a73e8, #0066cc);
+  color: #fff;
+  border-radius: 50rpx;
+  font-weight: bold;
+  margin: 40rpx 0;
+  font-size: 17px;
+  height: 85rpx;
+  line-height: 55rpx;
+  box-shadow: 0 4rpx 12rpx rgba(26,115,232,0.3);
+}
+.calculate-btn.disabled {
+  background: #cccccc;
+  box-shadow: none;
+}
+
+/* 温馨提示 */
+.tip {
+  background-color: #e6f7ff;
+  border-radius: 12rpx;
+  padding: 20rpx 25rpx;
+  margin: 0 0 25rpx 0;
+  font-size: 14px;
+  color: #0066cc;
+  border-left: 6rpx solid #0066cc;
+}
+
+/* 警告提示 */
+.warning {
+  background-color: #fff8e6;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 25rpx;
+  font-size: 14px;
+  color: #ff5722;
+  border: 1rpx solid #ff9800;
+  text-align: center;
+}
+
+/* 结果区域 */
+.result-container {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 10rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.03);
+}
+.result-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 30rpx;
+  display: block;
+  color: #333;
+  text-align: center;
+  position: relative;
+  padding-bottom: 25rpx;
+}
+.result-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100rpx;
+  height: 6rpx;
+  background: linear-gradient(90deg, #1a73e8, #00c4ff);
+  border-radius: 3rpx;
+}
+
+/* 摘要信息 */
+.result-summary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #f5f9ff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+}
+.summary-item {
+  width: 48%;
+  margin-bottom: 20rpx;
+  font-size: 15px;
+}
+.summary-value {
+  font-weight: bold;
+  color: #1a73e8;
+  display: block;
+  font-size: 16px;
+  margin-top: 10rpx;
+}
+
+/* 还款方式卡片 */
+.repayment-methods {
+  margin-top: 30rpx;
+}
+.method-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 15rpx rgba(0,0,0,0.05);
+  border: 1rpx solid #eee;
+  transition: all 0.3s ease;
+}
+.method-card:hover {
+  transform: translateY(-5rpx);
+  box-shadow: 0 8rpx 25rpx rgba(0,0,0,0.08);
+}
+.method1 {
+  border-top: 4rpx solid #1a73e8;
+}
+.method2 {
+  border-top: 4rpx solid #4CAF50;
+}
+.method-title {
+  font-weight: bold;
+  font-size: 17px;
+  display: block;
+  text-align: center;
+  margin-bottom: 25rpx;
+  position: relative;
+  padding-bottom: 20rpx;
+  color: #333;
+}
+.method-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background-color: #1a73e8;
+  border-radius: 2rpx;
+}
+.method2 .method-title::after {
+  background-color: #4CAF50;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  font-size: 15px;
+}
+.result-row:last-child {
+  border-bottom: none;
+}
+.amount {
+  font-weight: bold;
+  color: #333;
+}
+.savings {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* 贷款类型提示 */
+.loan-type-hint {
+  background-color: #f0f7ff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-top: 30rpx;
+  font-size: 14px;
+  color: #1a73e8;
+  text-align: center;
+  border: 1rpx dashed #1a73e8;
+}
+
+/* 图表区域 */
+.chart-container {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.03);
+}
+.chart {
+  height: 45rpx;
+  background-color: #f0f0f0;
+  border-radius: 45rpx;
+  margin: 30rpx 0 35rpx;
+  display: flex;
+  overflow: hidden;
+  box-shadow: inset 0 2rpx 5rpx rgba(0,0,0,0.1);
+}
+.chart-bar {
+  height: 100%;
+  transition: width 0.8s ease;
+}
+.chart-legend {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 0 15rpx 20rpx;
+}
+.color-box {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+/* 计算结果说明 */
+.notice {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.03);
+  font-size: 14px;
+  color: #666;
+  line-height: 1.8;
+}
+.notice text {
+  display: block;
+  margin-bottom: 20rpx;
+}
+.notice-title {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 25rpx;
+  font-size: 17px;
+  text-align: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}

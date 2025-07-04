@@ -1,6 +1,7 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
+    mapheight:0,
     commercialTotal: 1000000,
     houseArea:100,
     persqmPrice:10000,
@@ -27,6 +28,7 @@ Page({
     gjjTotalfocus:0,
     totalTitle:"房价总额",
     gjjtotalTitle:"房价总额",
+    downPay:0,//20230325新增首付字段
     baselpr:[
       { key: 0, name: "一年期利率",content: "3.70%"},
       { key: 1, name: "五年期利率",content: "4.60%"},
@@ -42,11 +44,14 @@ Page({
       success: function (res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
+          mapheight:wx.getSystemInfoSync().windowHeight
         });
       }
     });
     console.log(parseInt(this.data.sliderOffset));
+    console.log(parseInt(this.data.mapheight));
+
     wx.showLoading({
       title: "数据加载中...",
       mask: true
@@ -314,6 +319,8 @@ Page({
     var interestRatePerMou0;
     var interestRatePerMou1;
     var totalMouths;
+    var downPay;
+
     // commercialTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.commercialTotal : this.data.commercialTotal * this.data.percentArr[this.data.percentIndex] / 10;
     // gjjTotal = this.data.loanIndex == 1 || this.data.activeIndex == 2 ? this.data.gjjTotal : this.data.gjjTotal * this.data.percentArr[this.data.percentIndex] / 10;
     if(this.data.loanIndex == 2){
@@ -329,9 +336,26 @@ Page({
     console.log(interestRatePerMou0);
     console.log(interestRatePerMou1);
     totalMouths = this.data.years * 12;
+    //20230325新增首付计算逻辑
+    if(this.data.activeIndex == 0){
+      if(this.data.loanIndex==0 || 2){
+        downPay = (this.data.loanIndex == 0 || this.data.activeIndex == 2 ? this.data.commercialTotal * (1 - this.data.percentArr[this.data.percentIndex] / 10):this.data.houseArea * this.data.persqmPrice * (1 - this.data.percentArr[this.data.percentIndex] / 10)).toFixed(2);
+    }
+    else{
+      downPay = 0;
+    }}
+    else if(this.data.activeIndex == 1){
+      if(this.data.loanIndex==0 || 2){
+        downPay = (this.data.loanIndex == 0 || this.data.activeIndex == 2 ? this.data.gjjTotal * (1 - this.data.percentArr[this.data.percentIndex] / 10):this.data.houseArea * this.data.persqmPrice * (1 - this.data.percentArr[this.data.percentIndex] / 10)).toFixed(2);
+    }
+    else{
+      downPay = null;
+    }}
+
     wx.navigateTo({
-      url: '/pages/detail/detail?parentActiveIndex=' + this.data.activeIndex + '&commercialTotal=' + commercialTotal + '&gjjTotal=' + gjjTotal + '&interestRatePerMou0=' + interestRatePerMou0 + '&interestRatePerMou1=' + interestRatePerMou1 + '&totalMouths=' + totalMouths
-    })
+      url: '/pages/detail/detail?parentActiveIndex=' + this.data.activeIndex + '&commercialTotal=' + commercialTotal + '&gjjTotal=' + gjjTotal + '&interestRatePerMou0=' + interestRatePerMou0 + '&interestRatePerMou1=' + interestRatePerMou1 + '&totalMouths=' + totalMouths + "&downPay=" + downPay
+    +"&loanIndex="+ this.data.loanIndex})
+    console.log("downPay: "+parseInt(downPay))
   },
   tabClick: function (e) {
     this.setData({
@@ -417,7 +441,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '房贷计算器2023版',
+      title: '房贷计算器2025',
       path: '/pages/mortgage/mortgage',
       success: function (res) {
         // 转发成功
@@ -426,5 +450,17 @@ Page({
         // 转发失败
       }
     }
+  },
+  // 导航到提前还贷计算器
+  navigateToLoanCalculator: function() {
+    wx.navigateTo({
+      url: '/pages/tiqianhuandai/tiqianhuandai'
+    })
+  },
+  // 导航到房屋税费计算器
+  navigateToTaxCalculator: function() {
+    wx.navigateTo({
+      url: '/pages/fangwushuifeiindex/fangwushuifeiindex'
+    })
   }
 });
