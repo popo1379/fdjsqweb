@@ -1,10 +1,9 @@
 <view class="container">
   <!-- 标题 -->
-  <view class="header">
-    <text class="title">提前还款计算器</text>
-    <text class="subtitle">准确计算提前还款能省多少钱</text>
+  <view>
+    <!-- <text class="title">提前还款计算器</text>
+    <text class="subtitle">准确计算提前还款能省多少钱</text> -->
   </view>
-
   <!-- 贷款类型选择 -->
   <view class="form-section">
     <text class="section-title">贷款类型</text>

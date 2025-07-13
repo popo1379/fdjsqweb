@@ -1,3 +1,4 @@
+let interstitialAd = null
 Page({
   data: {
     currentTab: 0, // 0:二手房, 1:新房
@@ -22,6 +23,26 @@ Page({
     }
   },
 
+  async onLoad() {
+    // 在页面onLoad回调事件中创建插屏广告实例
+if (wx.createInterstitialAd) {
+  interstitialAd = wx.createInterstitialAd({
+    adUnitId: 'adunit-bf9cc3488c9453a0'
+  })
+  interstitialAd.onLoad(() => {})
+  interstitialAd.onError((err) => {
+    console.error('插屏广告加载失败', err)
+  })
+  interstitialAd.onClose(() => {})
+}
+
+// 在适合的场景显示插屏广告
+if (interstitialAd) {
+  interstitialAd.show().catch((err) => {
+    console.error('插屏广告显示失败', err)
+  })
+}
+  },
   // 切换Tab页
   switchTab(e) {
     this.setData({

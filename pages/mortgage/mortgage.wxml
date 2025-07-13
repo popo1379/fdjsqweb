@@ -10,7 +10,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-         <!-- <ad unit-id="adunit-dcf321067325ce20" bindload="adLoad" binderror="adError" bindclose="adClose"></ad> -->
+         <ad unit-id="adunit-cc8da11d149599ec" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
         <view class="weui-tab__content"> 
           <view class="page-section">
             <view class="weui-cells weui-cells_after-title">
@@ -18,6 +18,14 @@
                 <view class="weui-cell__hd">
                   <view class="weui-label">商业贷利率：</view>
                 </view>
+                <!-- 商业贷款利率弹窗 -->
+                <view aria-role="dialog" aria-modal="true" aria-hidden="{{!showDialog}}">
+                  <view class="mask {{showDialog ? 'show' : ''}}" catchtouchmove="return"></view>
+                  <view class="dialog {{showDialog ? 'show' : ''}}" catchtouchmove="return">
+                    弹窗内容
+                  </view>
+                </view>
+              <!-- 结束 -->
                 <view class="weui-cell__bd">
                   <input class="weui-input" type="digit" placeholder="请输入贷款利率" name="data0" value="{{rates}}" maxlength='6' bindinput="ratesChange" bindfocus="focus_ratesnullbut" bindblur="blur_ratesnullbut" ></input>
                 </view>

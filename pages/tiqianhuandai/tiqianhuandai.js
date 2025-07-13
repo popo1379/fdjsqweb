@@ -1,5 +1,7 @@
+let interstitialAd = null
 Page({
   data: {
+
     // 贷款选项
     loanTypes: [
       { name: '商业贷款', value: 'commercial' },
@@ -81,9 +83,26 @@ Page({
         console.log(that.data.lprList);
         console.log(that.data.lprList.year);
       }
+      
     })
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-f97bf96c44524886'
+      })
+      interstitialAd.onLoad(() => {})
+      interstitialAd.onError((err) => {
+        console.error('插屏广告加载失败', err)
+      })
+      interstitialAd.onClose(() => {})
+    }
+    // 在适合的场景显示插屏广告
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.error('插屏广告显示失败', err)
+      })
+    }
   },
-
+  
   // 监听表单变化 - 更新表单有效性
   checkFormValidity: function() {
     // 基本表单验证

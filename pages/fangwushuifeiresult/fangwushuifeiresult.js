@@ -22,7 +22,16 @@ Page({
       this.calculateNewHouseTax(houseData);
     }
   },
-
+  // 广告
+  adLoad() {
+    console.log('原生模板广告加载成功')
+  },
+  adError(err) {
+    console.error('原生模板广告加载失败', err)
+  },
+  adClose() {
+    console.log('原生模板广告关闭')
+  },
   // 计算二手房税费（2023最新政策）
   calculateUsedHouseTax(data) {
     const houseArea = parseFloat(data.houseArea);

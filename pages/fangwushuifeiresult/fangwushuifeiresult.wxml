@@ -38,7 +38,7 @@
           </view>
         </view>
       </view>
-      
+
       <!-- 税费明细 -->
       <view class="section-title">
         <icon type="pay" size="24" /> 税费详情

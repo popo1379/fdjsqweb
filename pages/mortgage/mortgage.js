@@ -38,6 +38,16 @@ Page({
     condition:false,
     picurl:"cloud://mortgagecalculator-9d0fqf0fbb151.6d6f-mortgagecalculator-9d0fqf0fbb151-1311269700/"
   },
+  // 广告加载模块
+  adLoad() {
+    console.log('原生模板广告加载成功')
+  },
+  adError(err) {
+    console.error('原生模板广告加载失败', err)
+  },
+  adClose() {
+    console.log('原生模板广告关闭')
+  },
   async onLoad() {
     var that = this;
     wx.getSystemInfo({
@@ -462,5 +472,6 @@ Page({
     wx.navigateTo({
       url: '/pages/fangwushuifeiindex/fangwushuifeiindex'
     })
-  }
+  },
+
 });
