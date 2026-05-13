@@ -56,8 +56,13 @@
             <view class="weui-form-preview__ft">
               <view class="weui-form-preview__btn weui-form-preview__btn_primary"  bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
+            <!-- 放到计算器2025广告ID -->
             <ad-custom unit-id="adunit-4186df7ccb422e2e" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom>
-          </view>
+            <!-- 放到计算器2024版广告ID -->
+            <!-- <ad-custom unit-id="adunit-807337e04c4c1b69" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom> -->
+            <!-- 放到计算器2025博时版广告ID -->
+            <!-- <ad-custom unit-id="adunit-241bf6dff477fdbe" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom>          -->
+             </view>
           <!-- <view class="banner_box" hidden="{{!hiddenDetail}}" >
               <text class="text_lprname">更多推荐</text>
               <view class="banner_list">
@@ -135,8 +140,13 @@
             <view class="weui-form-preview__ft">
               <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
+            <!-- 放到计算器2025广告ID -->
             <ad-custom unit-id="adunit-4186df7ccb422e2e" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom>
-          </view>
+            <!-- 放到计算器2024版广告ID -->
+            <!-- <ad-custom unit-id="adunit-807337e04c4c1b69" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom> -->
+            <!-- 放到计算器2025博时版广告ID -->
+            <!-- <ad-custom unit-id="adunit-241bf6dff477fdbe" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom>       -->
+            </view>
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">
             <view class="weui-flex">
               <view class="weui-flex__item">
@@ -210,9 +220,13 @@
             <view class="weui-form-preview__ft">
               <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="showDetail" hover-class="weui-form-preview__btn_active">{{hiddenDetail? ">>展开还款明细<<": "收起"}}</view>
             </view>
+            <!-- 放到计算器2025广告ID -->
             <ad-custom unit-id="adunit-4186df7ccb422e2e" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom>
-          </view>
-
+            <!-- 放到计算器2024版广告ID -->
+            <!-- <ad-custom unit-id="adunit-807337e04c4c1b69" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom> -->
+            <!-- 放到计算器2025博时版广告ID -->
+            <!-- <ad-custom unit-id="adunit-241bf6dff477fdbe" bindload="adLoad" binderror="adError" bindclose="adClose"></ad-custom> -->
+            </view>
           <view class="page__bd page__bd_spacing table" hidden="{{hiddenDetail}}">
             <view class="weui-flex">
               <view class="weui-flex__item">

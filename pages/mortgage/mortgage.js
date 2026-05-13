@@ -36,7 +36,35 @@ Page({
     ],
     newlist:"",
     condition:false,
-    picurl:"cloud://mortgagecalculator-9d0fqf0fbb151.6d6f-mortgagecalculator-9d0fqf0fbb151-1311269700/"
+    picurl:"cloud://mortgagecalculator-9d0fqf0fbb151.6d6f-mortgagecalculator-9d0fqf0fbb151-1311269700/",
+    // 商业贷款半遮罩弹窗变量
+    showModal: false,        // 商业利率弹窗显示控制
+    showfundModal:false,// 公积金利率弹窗弹窗显示控制
+    interestRate:0,    // 当前选择的商业利率值
+    interestfundRate:0, // 当前选择的公积金利率值
+    tempRate:0,       // 临时存储的商业利率值
+    tempfundRate:0,// 临时存储的公积金利率值
+    inputFocus: false,        // 商业利率输入框聚焦状态
+    inputfundFocus: false,        // 公积金利率输入框聚焦状态
+    rate_45basic:0,
+    rate_30basic:0,
+    rate_5basic:0,
+    rate_0basic:0,
+    gjj_basic:0,
+    gjj_2_basic:0,//第二套公积金利率弹窗
+    // 公积金贷款半遮罩弹窗变量
+    interestgjjRate:0,    // 当前选择的利率值
+    tempgjjRate:0,       // 临时存储的利率值
+    
+    //新增云存储利率变量
+    cloud_syrates:0,
+    cloud_fundrates:0,
+    cloud_2_fundrates:0,
+    // 总额角标样式逻辑
+    inputValue: '',
+    currentUnit: '',
+    unitList: ['', '万', '十万', '百万', '千万', '亿'],
+    unitValues: [1, 10000, 100000, 1000000, 10000000, 100000000]
   },
   // 广告加载模块
   adLoad() {
@@ -83,12 +111,28 @@ Page({
           lprList:res.data
         })
         that.setData({
-          rates:that.data.lprList.standardrate,
-          fundrates:that.data.lprList.gjjrate
+          cloud_syrates:that.data.lprList.standardrate,
+          cloud_fundrates:that.data.lprList.gjjrate,
+          cloud_2_fundrates:that.data.lprList.gjj_2_rate,
         })
         wx.hideLoading()
         console.log(that.data.lprList);
         console.log(that.data.lprList.year);
+      //初设设置基点扣除利率
+      that.data.rate_45basic=that.data.cloud_syrates - 0.45
+      that.data.rate_30basic=that.data.cloud_syrates - 0.30
+      that.data.rate_5basic=that.data.cloud_syrates - 0.05
+      that.data.rate_0basic = that.data.cloud_syrates
+      that.setData({
+        rates:that.data.rate_45basic,//默认利率为-45基点利率
+        rate_45basic:that.data.rate_45basic,
+        rate_30basic:that.data.rate_30basic,
+        rate_5basic:that.data.rate_5basic,
+        rate_0basic:that.data.rate_0basic,
+        fundrates:that.data.cloud_fundrates,
+        gjj_basic:that.data.cloud_fundrates,
+        gjj_2_basic:that.data.cloud_2_fundrates,
+      })  
       }
     })
     function sortBy (field) {
@@ -110,6 +154,7 @@ Page({
         })
       }
     });
+
   },
   loanChange(e) {
     this.setData({
@@ -123,14 +168,22 @@ Page({
     })
     console.log(this.data.loanIndex);
   },
+  //打开商业选择利率弹窗
   ratesChange(e) {
     this.setData({
-      rates: e.detail.value
+      showModal: true,
+      tempRate: this.data.rates,
+      inputFocus: false,
     });
+    console.log(this.data.showModal);
   },
+  //打开公积金选择利率弹窗
   fundratesChange(e) {
     this.setData({
-      fundrates: e.detail.value
+      showfundModal: true,
+      tempfundRate: this.data.fundrates,
+      inputfundFocus: false,
+      // fundrates: e.detail.value
     });
   },
   rateChange0(e) {
@@ -154,8 +207,44 @@ Page({
     });
   },
   commercialTotalChange(e) {
+    //20250717新增角标处理判断逻辑
+    let value = e.detail.value;
+    
+    // 处理输入格式，只保留数字和小数点
+    value = value.replace(/[^\d.]/g, '');
+    
+    // 确保只有一个小数点
+    const decimalIndex = value.indexOf('.');
+    if (decimalIndex !== -1) {
+      const beforeDecimal = value.substring(0, decimalIndex);
+      const afterDecimal = value.substring(decimalIndex);
+      value = beforeDecimal.replace(/[^\d]/g, '') + afterDecimal;
+      // 防止多个小数点
+      if (beforeDecimal.replace(/[^\d]/g, '').length > 1) {
+        value = value.charAt(0) + '.' + value.substring(2);
+      }
+    } else {
+      value = value.replace(/[^\d]/g, '');
+    }
+
+    // 计算当前单位
+    let unit = '';
+    if (value) {
+      const numValue = parseFloat(value);
+      for (let i = this.data.unitList.length - 1; i >= 0; i--) {
+        if (i === 0) {
+          unit = '';
+          break;
+        }
+        if (numValue >= this.data.unitValues[i]) {
+          unit = this.data.unitList[i];
+          break;
+        }
+      }
+    }
     this.setData({
-      commercialTotal: e.detail.value
+      commercialTotal: e.detail.value,
+      currentUnit: unit
     });
   },
   houseAreaChange(e) {
@@ -474,4 +563,156 @@ Page({
     })
   },
 
+    // 关闭商业利率弹窗
+    closeModal() {
+      this.setData({ 
+        showModal: false,
+        inputFocus: false 
+      });
+    },
+      // 关闭商业利率弹窗
+      closefundModal() {
+        this.setData({ 
+          showfundModal: false,
+          inputfundFocus: false 
+        });
+      },
+
+    // 阻止触摸事件冒泡
+    preventTouch() {
+      return;
+    },
+  
+    // 选择商业贷款预设利率
+    selectPresetRate(e) {
+      const rate = e.currentTarget.dataset.rate;
+      this.setData({ 
+        tempRate: rate,
+        inputFocus: false,
+      });
+      console.log("临时存储利率tempRate："+this.data.tempRate)
+    },
+        // 选择公积金贷款预设利率
+        selectPresetfundRate(e) {
+          const rate = e.currentTarget.dataset.fundrate;
+          this.setData({ 
+            tempfundRate: rate,
+            inputFocus: false,
+          });
+          console.log("临时存储公积金利率tempfundRate："+this.data.tempfundRate)
+        },
+    // 输入自定义商业利率
+    onCustomInput(e) {
+      let value = e.detail.value;
+      
+      // 验证输入是否为有效数字且在0-100范围内
+      if (value && !isNaN(value) && value >= 0 && value <= 100) {
+        this.setData({ 
+          tempRate: value,
+          inputFocus: true
+        });
+      } else if (value === "") {
+        this.setData({ 
+          tempRate: "",
+          inputFocus: true
+        });
+      }
+    },
+       // 输入自定义公积金利率
+       onFundInput(e) {
+        let value = e.detail.value;
+        // 验证输入是否为有效数字且在0-100范围内
+        if (value && !isNaN(value) && value >= 0 && value <= 100) {
+          this.setData({ 
+            tempfundRate: value,
+            inputfundFocus: true
+          });
+        } else if (value === "") {
+          this.setData({ 
+            tempfundRate: "",
+            inputfundFocus: true
+          });
+        }
+      },
+
+    // 确认选择的商业利率
+    confirmRate() {
+      if (!this.data.tempRate) {
+        wx.showToast({
+          title: '请输入有效利率值',
+          icon: 'none'
+        });
+        return;
+      }
+      // 确保不超过三位小数
+      const rate = parseFloat(this.data.tempRate).toFixed(3);
+      
+      this.setData({
+        rates: rate,
+        showModal: false,
+        inputFocus: false
+      });
+      console.log("回显利率rates："+this.data.rates)
+
+      // 显示成功提示
+      wx.showToast({
+        title: '利率设置成功',
+        icon: 'success'
+      });
+    },
+    // 确认选择的公积金利率
+    confirmfundRate() {
+      if (!this.data.tempfundRate) {
+        wx.showToast({
+          title: '请输入有效利率值',
+          icon: 'none'
+        });
+        return;
+      }
+      // 确保不超过三位小数
+      const rate = parseFloat(this.data.tempfundRate).toFixed(3);
+      
+      this.setData({
+        fundrates: rate,
+        showfundModal: false,
+        inputfundFocus: false
+      });
+      console.log("回显利率fundrates："+this.data.fundrates)
+
+      // 显示成功提示
+      wx.showToast({
+        title: '利率设置成功',
+        icon: 'success'
+      });
+    },
+    // 角标样式逻辑 20250717新增
+     // 格式化金额显示
+  getFormattedAmount() {
+    const { inputValue, currentUnit, unitList, unitValues } = this.data;
+    if (!inputValue) return '0元';
+    
+    const numValue = parseFloat(inputValue);
+    
+    // 如果没有单位或者是元，直接返回
+    if (!currentUnit || currentUnit === '元') {
+      return `${numValue.toFixed(2)}元`;
+    }
+    
+    // 找到当前单位的索引
+    const unitIndex = unitList.indexOf(currentUnit);
+    const unitValue = unitValues[unitIndex];
+    
+    // 除以单位值得到以该单位为基准的数值
+    const formattedValue = numValue / unitValue;
+    
+    return `${formattedValue.toFixed(4)}${currentUnit}`;
+  },
+  
+  onFocus(e) {
+    // 输入框获得焦点时保持单位显示
+  },
+
+  onBlur() {
+    // 失去焦点时保持单位显示（可选）
+  }
 });

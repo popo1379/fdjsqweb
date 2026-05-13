@@ -27,7 +27,9 @@ Page({
     // 在页面onLoad回调事件中创建插屏广告实例
 if (wx.createInterstitialAd) {
   interstitialAd = wx.createInterstitialAd({
-    adUnitId: 'adunit-bf9cc3488c9453a0'
+    adUnitId: 'adunit-bf9cc3488c9453a0' //房贷计算器2025
+    //adUnitId: 'adunit-b57ba6291c86f332'//房贷计算器2024版
+    // adUnitId: 'adunit-b0ff359ddad53c95'//房贷计算器2025博时版
   })
   interstitialAd.onLoad(() => {})
   interstitialAd.onError((err) => {

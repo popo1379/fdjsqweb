@@ -1,0 +1,37 @@
+// 主题色
+$primary-color: #1678ff;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$error-color: #f5222d;
+$text-color: #333333;
+$text-color-secondary: #666666;
+$text-color-light: #999999;
+
+// 背景色
+$bg-color: #f5f7fa;
+$bg-color-white: #ffffff;
+$border-color: #e8e8e8;
+
+// 字体
+$font-size-base: 14px;
+$font-size-sm: 12px;
+$font-size-lg: 16px;
+
+// 间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 圆角
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+
+// 阴影
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+$box-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+// 响应式断点
+$breakpoint-mobile: 768px;
