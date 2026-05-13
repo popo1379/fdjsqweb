@@ -1,2 +1,0 @@
-<!--pages/policy/policy.wxml-->
-<web-view src="{{wxurl}}"></web-view>
