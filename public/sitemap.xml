@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://calculator.opensero.com/</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/"/>
+    <image:image>
+      <image:loc>https://calculator.opensero.com/icons/favicon.svg</image:loc>
+      <image:title>房贷计算器2026 - 在线房贷计算工具</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://calculator.opensero.com/mortgage</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/mortgage"/>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://calculator.opensero.com/mortgage/detail</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/mortgage/detail"/>
   </url>
   <url>
     <loc>https://calculator.opensero.com/early-repayment</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/early-repayment"/>
   </url>
   <url>
     <loc>https://calculator.opensero.com/house-tax</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/house-tax"/>
   </url>
   <url>
     <loc>https://calculator.opensero.com/policy</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://calculator.opensero.com/policy"/>
   </url>
 </urlset>
