@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90d9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00cec9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f4fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5b8def;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6ba3f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00a383;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="60" ry="60" fill="url(#bgGradient)"/>
+  <path d="M450 400 Q300 450 150 400 L100 512 L512 512 Q462 400 450 400 Z" fill="url(#greenGradient)"/>
+  <rect x="120" y="70" width="272" height="272" rx="50" ry="50" fill="url(#innerGradient)"/>
+  <path d="M180 150 L180 120 L200 120 L200 150 L240 150 L240 170 L200 170 L200 210 L180 210 L180 170 L140 170 L140 150 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M300 140 L300 120 L380 120 L380 140 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M300 180 L300 160 L380 160 L380 180 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M180 230 L200 250 L220 230 L240 250 L260 230 L240 250 L260 270 L240 290 L220 270 L200 290 L180 270 L200 250 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M300 230 L380 230 L380 250 L300 250 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M300 270 L380 270 L380 290 L300 290 Z" fill="url(#accentGradient)" stroke="#4a8cd9" stroke-width="2"/>
+  <path d="M160 400 Q160 380 180 380 L190 380 Q210 380 210 400 L210 440 Q210 460 190 460 L160 460 Q140 460 140 440 L140 400 Q140 380 160 380" fill="white"/>
+  <path d="M210 380 L210 400 L250 400 L250 380" fill="white"/>
+  <path d="M270 380 Q270 360 300 360 Q330 360 330 380 L330 440 Q330 460 300 460 Q270 460 270 440 Z" fill="white"/>
+  <path d="M290 400 L310 400" stroke="#5b8def" stroke-width="4" stroke-linecap="round"/>
+  <path d="M350 380 L350 460" fill="white"/>
+  <path d="M370 380 L370 460" fill="white"/>
+  <path d="M350 390 L390 390" fill="white"/>
+  <path d="M350 410 L390 410" fill="white"/>
+  <path d="M350 430 L380 430" fill="white"/>
+  <path d="M350 450 L370 450" fill="white"/>
+  <path d="M400 380 Q400 360 430 360 Q460 360 460 380 L460 440 Q460 460 430 460 Q400 460 400 440 Z" fill="white"/>
+  <path d="M410 400 L410 440" stroke="#5b8def" stroke-width="4" stroke-linecap="round"/>
+  <path d="M420 400 L450 400" stroke="#5b8def" stroke-width="4" stroke-linecap="round"/>
+</svg>

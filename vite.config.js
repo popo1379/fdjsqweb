@@ -8,7 +8,7 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico'],
+      includeAssets: ['favicon.ico', 'icons/favicon.svg'],
       manifest: {
         name: '房贷计算器2026',
         short_name: '房贷计算器',
@@ -18,14 +18,9 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'icons/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'icons/pwa-512x512.png',
+            src: 'icons/favicon.svg',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg+xml'
           }
         ]
       }
